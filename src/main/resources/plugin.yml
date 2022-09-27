@@ -1,0 +1,23 @@
+name: ToolUpgrades
+version: ${version}
+author: Crafty
+main: de.crafty.toolupgrades.ToolUpgrades
+
+api-version: 1.19
+
+
+commands:
+  applyUpgrade:
+    usage: /applyUpgrade <Upgrade> (Player)
+    permission: toolupgrades.cmd
+    description: Applies an upgrade to the item the player is holding
+
+  removeUpgrade:
+    usage: /removeUpgrade <Upgrade> (Player)
+    permission: toolupgrades.cmd
+    description: Removes an upgrade from the item the player is holding
+
+  upgrade:
+    usage: /upgrade <Upgrade> (Player)
+    permission: toolupgrades.cmd
+    description: Gives an Upgrade Item to a Player
