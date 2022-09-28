@@ -39,20 +39,21 @@ public class TeleportationHandler implements Listener {
         if (!ToolManager.hasUpgrade(usedStack, ToolUpgrade.TELEPORTATION) || !(CraftItemStack.asNMSCopy(usedStack).c() instanceof ItemSword))
             return;
 
-        if((((Damageable)usedStack.getItemMeta()).getDamage() >= usedStack.getType().getMaxDurability()))
+        if ((((Damageable) usedStack.getItemMeta()).getDamage() >= usedStack.getType().getMaxDurability()))
             return;
 
+        int teleportRange = ToolUpgrades.getInstance().teleportationRange();
         Location eyeLoc = player.getEyeLocation();
 
         Vector lookVec = eyeLoc.getDirection();
-        Location destination = player.getEyeLocation().add(new Vector(10, 10, 10).multiply(lookVec));
+        Location destination = player.getEyeLocation().add(new Vector(teleportRange, teleportRange, teleportRange).multiply(lookVec));
 
         if (!player.getWorld().getBlockAt(destination).isEmpty()) {
 
             destination = eyeLoc.clone();
             Location prevDest;
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < teleportRange; i++) {
 
                 prevDest = destination.clone();
                 destination.add(new Vector(1, 1, 1).multiply(lookVec));
@@ -71,7 +72,7 @@ public class TeleportationHandler implements Listener {
         player.teleport(destination);
         player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
 
-        if(player.getGameMode() == GameMode.CREATIVE)
+        if (player.getGameMode() == GameMode.CREATIVE)
             return;
 
         Damageable meta = (Damageable) usedStack.getItemMeta();

@@ -27,15 +27,17 @@ public class ToolUpgrades extends JavaPlugin {
         this.saveDefaultConfig();
 
 
+        Bukkit.getConsoleSender().sendMessage(PREFIX + "Registering Listeners...");
         this.getCommand("applyUpgrade").setExecutor(new CMD_applyUpgrade());
         this.getCommand("removeUpgrade").setExecutor(new CMD_removeUpgrade());
         this.getCommand("upgrade").setExecutor(new CMD_upgrade());
 
+        //General Listener
         Bukkit.getPluginManager().registerEvents(new PlayerApplyUpgradeListener(), this);
         Bukkit.getPluginManager().registerEvents(new UpgradeAbusePreventionListener(), this);
 
 
-        //Handler
+        //Upgrade Handler
         Bukkit.getPluginManager().registerEvents(new MagnetismHandler(), this);
         Bukkit.getPluginManager().registerEvents(new AutoSmeltingHandler(), this);
         Bukkit.getPluginManager().registerEvents(new MultiMinerHandler(), this);
@@ -54,8 +56,6 @@ public class ToolUpgrades extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
-
         Bukkit.getConsoleSender().sendMessage(PREFIX + "\u00a7cPlugin disabled");
     }
 
@@ -65,11 +65,11 @@ public class ToolUpgrades extends JavaPlugin {
     }
 
 
-    public int multiMinerMaxBlocks(){
+    public int multiMinerMaxBlocks() {
         return this.getConfig().getInt("multiMinerMaxBlocks");
     }
 
-    public int teleportationRange(){
+    public int teleportationRange() {
         return this.getConfig().getInt("teleportationRange");
     }
 }

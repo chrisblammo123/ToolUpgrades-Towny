@@ -19,10 +19,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -67,7 +64,7 @@ public class MobCaptureHandler implements Listener {
         Entity entity = event.getRightClicked();
         SpawnCategory spawnCategory = entity.getSpawnCategory();
 
-        if (spawnCategory == SpawnCategory.MISC)
+        if (!(entity instanceof LivingEntity) || entity instanceof Player)
             return;
 
         int toolLevel = this.getToolLevel(usedStack);
@@ -226,7 +223,7 @@ public class MobCaptureHandler implements Listener {
     public void onBowCapture$1(ProjectileHitEvent event) {
 
 
-        if (event.getHitEntity() == null || event.getHitEntity().getSpawnCategory() == SpawnCategory.MISC)
+        if (event.getHitEntity() == null || !(event.getHitEntity() instanceof LivingEntity) || event.getHitEntity() instanceof Player)
             return;
 
         if (!event.getEntity().getPersistentDataContainer().has(new NamespacedKey(ToolUpgrades.getInstance(), "capturer"), PersistentDataType.STRING))

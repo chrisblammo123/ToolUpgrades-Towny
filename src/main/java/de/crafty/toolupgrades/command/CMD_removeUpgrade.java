@@ -25,31 +25,12 @@ public class CMD_removeUpgrade implements TabExecutor {
             return false;
 
 
-        Player target = null;
+        Player target = CommandUtils.getTarget(args, 1, sender instanceof Player p ? p : null);
 
-        if (args.length == 1) {
-
-            if (sender instanceof Player player)
-                target = player;
-            else
-                return true;
+        if(target == null){
+            sender.sendMessage(ToolUpgrades.PREFIX + "Could not find player \u00a7b" + args[1]);
+            return true;
         }
-
-
-        if (args.length == 2) {
-
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (player.getName().equalsIgnoreCase(args[1]))
-                    target = player;
-            }
-
-            if (target == null) {
-                sender.sendMessage(ToolUpgrades.PREFIX + "Could not find player \u00a7b" + args[1]);
-                return true;
-            }
-
-        }
-
 
         ItemStack targetStack = target.getInventory().getItemInMainHand();
 
@@ -79,11 +60,10 @@ public class CMD_removeUpgrade implements TabExecutor {
         List<String> list = new ArrayList<>();
 
         if (args.length == 1)
-            Arrays.stream(ToolUpgrade.values()).filter(upgrade -> upgrade.name().startsWith(args[0].toUpperCase())).forEach(upgrade -> list.add(upgrade.name().toLowerCase()));
-
+            CommandUtils.fetchUpgrades(args[0], list);
 
         if (args.length == 2)
-            Bukkit.getOnlinePlayers().stream().filter(player -> player.getName().toUpperCase().startsWith(args[1].toUpperCase())).forEach(player -> list.add(player.getName()));
+            CommandUtils.fetchPlayerNames(args[1], list);
 
         return list;
     }
