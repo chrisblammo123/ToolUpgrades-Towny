@@ -197,6 +197,7 @@ public class MobCaptureHandler implements Listener {
     @EventHandler
     public void onBowCapture$0(EntityShootBowEvent event) {
 
+
         if (!(event.getEntity() instanceof Player player))
             return;
 
@@ -206,16 +207,10 @@ public class MobCaptureHandler implements Listener {
             return;
 
 
-        ItemStack modifiedUsedStack = usedStack.clone();
-        if (player.getGameMode() != GameMode.CREATIVE) {
-            Damageable meta = (Damageable) modifiedUsedStack.getItemMeta();
-            meta.setDamage(meta.getDamage() + 1);
-            modifiedUsedStack.setItemMeta(meta);
-        }
-
-        event.getProjectile().getPersistentDataContainer().set(new NamespacedKey(ToolUpgrades.getInstance(), "capturer"), PersistentDataType.STRING, player.getUniqueId().toString());
-        event.getProjectile().getPersistentDataContainer().set(new NamespacedKey(ToolUpgrades.getInstance(), "capturerHashCode"), PersistentDataType.INTEGER, modifiedUsedStack.hashCode());
-
+        Bukkit.getScheduler().scheduleSyncDelayedTask(ToolUpgrades.getInstance(), () -> {
+            event.getProjectile().getPersistentDataContainer().set(new NamespacedKey(ToolUpgrades.getInstance(), "capturer"), PersistentDataType.STRING, player.getUniqueId().toString());
+            event.getProjectile().getPersistentDataContainer().set(new NamespacedKey(ToolUpgrades.getInstance(), "capturerHashCode"), PersistentDataType.INTEGER, usedStack.hashCode());
+        });
 
     }
 

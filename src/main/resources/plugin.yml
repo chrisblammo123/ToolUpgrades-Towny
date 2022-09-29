@@ -21,3 +21,7 @@ commands:
     usage: /upgrade <Upgrade> (Player)
     permission: toolupgrades.cmd
     description: Gives an Upgrade Item to a Player
+
+  upgradeRecipe:
+    usage: /upgradeRecipe <id>
+    description: Shows a recipe of an upgrade item

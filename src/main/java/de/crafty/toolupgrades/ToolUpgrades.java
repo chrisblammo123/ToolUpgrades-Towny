@@ -3,8 +3,10 @@ package de.crafty.toolupgrades;
 import de.crafty.toolupgrades.command.CMD_applyUpgrade;
 import de.crafty.toolupgrades.command.CMD_removeUpgrade;
 import de.crafty.toolupgrades.command.CMD_upgrade;
+import de.crafty.toolupgrades.command.CMD_upgradeRecipe;
 import de.crafty.toolupgrades.event.PlayerApplyUpgradeListener;
 import de.crafty.toolupgrades.event.UpgradeAbusePreventionListener;
+import de.crafty.toolupgrades.event.UpgradeRecipeViewListener;
 import de.crafty.toolupgrades.recipe.RecipeManager;
 import de.crafty.toolupgrades.upgradehandler.*;
 import org.bukkit.Bukkit;
@@ -31,10 +33,12 @@ public class ToolUpgrades extends JavaPlugin {
         this.getCommand("applyUpgrade").setExecutor(new CMD_applyUpgrade());
         this.getCommand("removeUpgrade").setExecutor(new CMD_removeUpgrade());
         this.getCommand("upgrade").setExecutor(new CMD_upgrade());
+        this.getCommand("upgradeRecipe").setExecutor(new CMD_upgradeRecipe());
 
         //General Listener
         Bukkit.getPluginManager().registerEvents(new PlayerApplyUpgradeListener(), this);
         Bukkit.getPluginManager().registerEvents(new UpgradeAbusePreventionListener(), this);
+        Bukkit.getPluginManager().registerEvents(new UpgradeRecipeViewListener(), this);
 
 
         //Upgrade Handler

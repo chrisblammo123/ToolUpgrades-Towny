@@ -25,17 +25,7 @@ public class CMD_upgrade implements TabExecutor {
         if (args.length != 1 && args.length != 2)
             return false;
 
-        Player target = null;
-
-        if (args.length == 1)
-            target = player;
-
-        if (args.length == 2) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                if (p.getName().equalsIgnoreCase(args[1]))
-                    target = p;
-            }
-        }
+        Player target = CommandUtils.getTarget(args, 1, player);
 
         if (target == null) {
             sender.sendMessage(ToolUpgrades.PREFIX + "Could not find player \u00a7b" + args[1]);
@@ -64,7 +54,8 @@ public class CMD_upgrade implements TabExecutor {
         List<String> list = new ArrayList<>();
 
         if (args.length == 1)
-            UpgradeItem.list().stream().filter(upgradeItem -> upgradeItem.getId().toUpperCase().startsWith(args[0].toUpperCase())).forEach(upgradeItem -> list.add(upgradeItem.getId()));
+            CommandUtils.fetchUpgradeItems(args[0], list);
+
 
         if (args.length == 2)
             Bukkit.getOnlinePlayers().stream().filter(player -> player.getName().toUpperCase().startsWith(args[1].toUpperCase())).forEach(player -> list.add(player.getName()));

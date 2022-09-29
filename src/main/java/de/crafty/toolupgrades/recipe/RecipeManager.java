@@ -9,13 +9,18 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeManager {
 
+
+    private static final List<ShapedRecipe> RECIPES = new ArrayList<>();
 
     public static void registerRecipes() {
 
@@ -29,7 +34,7 @@ public class RecipeManager {
         magnetism_upgrade.setIngredient('S', Material.DIAMOND_SWORD);
         magnetism_upgrade.setIngredient('P', Material.DIAMOND_PICKAXE);
 
-        Bukkit.addRecipe(magnetism_upgrade);
+        RecipeManager.addRecipe(magnetism_upgrade);
 
 
         //Ore Smelter
@@ -39,7 +44,7 @@ public class RecipeManager {
         auto_smelting_upgrade.setIngredient('O', Material.OBSIDIAN);
         auto_smelting_upgrade.setIngredient('F', Material.FURNACE);
 
-        Bukkit.addRecipe(auto_smelting_upgrade);
+        RecipeManager.addRecipe(auto_smelting_upgrade);
 
         //Multi Miner
         ShapedRecipe multi_miner_upgrade = new ShapedRecipe(new NamespacedKey(ToolUpgrades.getInstance(), "multi_miner_upgrade"), UpgradeItem.MULTI_MINER.getStack());
@@ -48,7 +53,7 @@ public class RecipeManager {
         multi_miner_upgrade.setIngredient('C', Material.COBBLESTONE);
         multi_miner_upgrade.setIngredient('N', Material.NETHERITE_INGOT);
 
-        Bukkit.addRecipe(multi_miner_upgrade);
+        RecipeManager.addRecipe(multi_miner_upgrade);
 
 
         //Teleportation
@@ -58,7 +63,7 @@ public class RecipeManager {
         teleportation_upgrade.setIngredient('P', Material.ENDER_PEARL);
         teleportation_upgrade.setIngredient('S', Material.DIAMOND_SWORD);
 
-        Bukkit.addRecipe(teleportation_upgrade);
+        RecipeManager.addRecipe(teleportation_upgrade);
 
         //Fadeless
         ShapedRecipe fadeless_upgrade = new ShapedRecipe(new NamespacedKey(ToolUpgrades.getInstance(), "fadeless_upgrade"), UpgradeItem.FADELESS.getStack());
@@ -67,7 +72,7 @@ public class RecipeManager {
         fadeless_upgrade.setIngredient('Y', Material.GOLD_INGOT);
         fadeless_upgrade.setIngredient('W', Material.WITHER_SKELETON_SKULL);
 
-        Bukkit.addRecipe(fadeless_upgrade);
+        RecipeManager.addRecipe(fadeless_upgrade);
 
 
         //Soft Fall
@@ -77,7 +82,7 @@ public class RecipeManager {
         soft_fall_upgrade.setIngredient('F', Material.FEATHER);
         soft_fall_upgrade.setIngredient('B', Material.DIAMOND_BOOTS);
 
-        Bukkit.addRecipe(soft_fall_upgrade);
+        RecipeManager.addRecipe(soft_fall_upgrade);
 
 
         //Ender Mask
@@ -86,7 +91,7 @@ public class RecipeManager {
         ender_mask_upgrade.setIngredient('E', Material.END_STONE);
         ender_mask_upgrade.setIngredient('P', Material.CARVED_PUMPKIN);
 
-        Bukkit.addRecipe(ender_mask_upgrade);
+        RecipeManager.addRecipe(ender_mask_upgrade);
 
         //Mob Capture
         ShapedRecipe mob_capture_upgrade = new ShapedRecipe(new NamespacedKey(ToolUpgrades.getInstance(), "mob_capture_upgrade"), UpgradeItem.MOB_CAPTURE.getStack());
@@ -95,7 +100,7 @@ public class RecipeManager {
         mob_capture_upgrade.setIngredient('R', Material.ROTTEN_FLESH);
         mob_capture_upgrade.setIngredient('B', Material.BUCKET);
 
-        Bukkit.addRecipe(mob_capture_upgrade);
+        RecipeManager.addRecipe(mob_capture_upgrade);
 
 
         //Silky
@@ -105,7 +110,7 @@ public class RecipeManager {
         silky_upgrade.setIngredient('S', Material.STRING);
         silky_upgrade.setIngredient('B', Material.NETHER_STAR);
 
-        Bukkit.addRecipe(silky_upgrade);
+        RecipeManager.addRecipe(silky_upgrade);
 
 
         //Life Bonus
@@ -115,9 +120,19 @@ public class RecipeManager {
         life_bonus_upgrade.setIngredient('G', Material.GLISTERING_MELON_SLICE);
         life_bonus_upgrade.setIngredient('N', Material.NETHERITE_INGOT);
 
-        Bukkit.addRecipe(life_bonus_upgrade);
+        RecipeManager.addRecipe(life_bonus_upgrade);
 
         Bukkit.getConsoleSender().sendMessage(ToolUpgrades.PREFIX + "\u00a7aRecipes have been loaded");
+    }
+
+
+    private static void addRecipe(ShapedRecipe recipe){
+        Bukkit.addRecipe(recipe);
+        RECIPES.add(recipe);
+    }
+
+    public static List<ShapedRecipe> recipes(){
+        return RECIPES;
     }
 
 

@@ -1,6 +1,8 @@
 package de.crafty.toolupgrades.command;
 
+import de.crafty.toolupgrades.recipe.RecipeManager;
 import de.crafty.toolupgrades.upgrade.ToolUpgrade;
+import de.crafty.toolupgrades.upgrade.UpgradeItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -30,6 +32,14 @@ public class CommandUtils {
 
     protected static void fetchUpgrades(String arg, List<String> completionList) {
         Arrays.stream(ToolUpgrade.values()).filter(upgrade -> upgrade.name().startsWith(arg.toUpperCase())).forEach(upgrade -> completionList.add(upgrade.name().toLowerCase()));
+    }
+
+    protected static void fetchUpgradeItems(String arg, List<String> completionList) {
+        UpgradeItem.list().stream().filter(upgradeItem -> upgradeItem.getId().toUpperCase().startsWith(arg.toUpperCase())).forEach(upgradeItem -> completionList.add(upgradeItem.getId()));
+    }
+
+    protected static void fetchUpgradeRecipes(String arg, List<String> completionList) {
+        RecipeManager.recipes().stream().filter(shapedRecipe -> shapedRecipe.getKey().getKey().toUpperCase().startsWith(arg.toUpperCase())).forEach(shapedRecipe -> completionList.add(shapedRecipe.getKey().getKey()));
     }
 
 }
