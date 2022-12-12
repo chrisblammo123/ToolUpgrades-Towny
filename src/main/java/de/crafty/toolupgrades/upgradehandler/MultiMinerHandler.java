@@ -46,6 +46,7 @@ public class MultiMinerHandler implements Listener {
                 // boolean bBuild = PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.BUILD);
 
 
+            // if player is in town/has perms, break block
             player.breakBlock(b);
         });
 
