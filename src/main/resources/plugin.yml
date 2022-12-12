@@ -1,10 +1,11 @@
 name: ToolUpgrades
 version: ${version}
-author: Crafty
+author: Crafty, fork by chrisblammo123
 main: de.crafty.toolupgrades.ToolUpgrades
 
 api-version: 1.19
 
+depend: [Towny]
 
 commands:
   applyUpgrade:

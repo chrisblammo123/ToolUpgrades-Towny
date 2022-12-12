@@ -12,6 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+//
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,10 @@ public class MultiMinerHandler implements Listener {
 
             if(usedStack.getType() == Material.AIR)
                 return;
+
+                //checking if a player can build/destyroy somewhere
+                // boolean bBuild = PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.BUILD);
+
 
             player.breakBlock(b);
         });
