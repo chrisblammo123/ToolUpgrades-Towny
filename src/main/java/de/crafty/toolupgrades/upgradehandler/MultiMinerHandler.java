@@ -40,6 +40,7 @@ public class MultiMinerHandler implements Listener {
             if(usedStack.getType() == Material.AIR)
                 return;
 
+            // if player is in town/has perms, break block
             player.breakBlock(b);
         });
 
